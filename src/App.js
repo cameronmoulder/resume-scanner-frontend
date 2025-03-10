@@ -13,6 +13,12 @@ function App() {
   const [output, setOutput] = useState("");
   const [fileName, setFileName] = useState("");
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files?.[0] || null;
+    setResumeFile(file);
+    setFileName(file?.name || "");
+  };
+
   const handlePayWithBTC = async () => {
     try {
       setLoading(true);
@@ -152,11 +158,6 @@ function App() {
       color: '#1f2937'
     }
   };
-  const handleFileUpload = (event) => {
-    const file = event.target.files?.[0] || null;
-    setResumeFile(file);
-    setFileName(file?.name || "");
-};
 
   return (
     <div style={styles.container}>

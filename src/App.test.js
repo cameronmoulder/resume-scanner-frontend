@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+/* eslint-env jest */  // ✅ Add Jest environment
 
-test('renders learn react link', () => {
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
+import App from "./App";
+
+test("renders resume scanner title", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText(/Resume Scanner/i)).toBeInTheDocument();
 });
