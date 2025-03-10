@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE = "https://resume-scanner-backend.azurewebsites.net";  // Deployed FastAPI URL
+// Or use an .env variable
+// const API_BASE = process.env.REACT_APP_API_BASE;
+
 function App() {
   const [invoiceId, setInvoiceId] = useState("");
-  const [jobTitle, setJobTitle] = useState(""); // New job title state
+  const [jobTitle, setJobTitle] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState("");
@@ -12,7 +16,7 @@ function App() {
   const handlePayWithBTC = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:8000/create-btc-invoice/");
+      const response = await axios.post(`${API_BASE}/create-btc-invoice/`);
       window.location.href = response.data.payment_url;
     } catch (error) {
       console.error("Error generating invoice:", error);
@@ -20,12 +24,6 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files?.[0] || null;
-    setResumeFile(file);
-    setFileName(file?.name || "");
   };
 
   const handleUploadResume = async (event) => {
@@ -39,10 +37,10 @@ function App() {
     const formData = new FormData();
     formData.append("file", resumeFile);
     formData.append("invoice_id", invoiceId);
-    formData.append("job_title", jobTitle); // Sending job title to the backend
+    formData.append("job_title", jobTitle);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/upload-resume/", formData, {
+      const response = await axios.post(`${API_BASE}/upload-resume/`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setOutput(JSON.stringify(response.data, null, 2));
