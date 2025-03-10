@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_BASE = "https://resume-scanner-backend.azurewebsites.net";  // Deployed FastAPI URL
-// Or use an .env variable
-// const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = "https://resume-scanner-backend.azurewebsites.net"; // Deployed FastAPI URL
 
 function App() {
   const [invoiceId, setInvoiceId] = useState("");
@@ -13,6 +11,7 @@ function App() {
   const [output, setOutput] = useState("");
   const [fileName, setFileName] = useState("");
 
+  // Ensure handleFileUpload is properly defined
   const handleFileUpload = (event) => {
     const file = event.target.files?.[0] || null;
     setResumeFile(file);
@@ -60,103 +59,97 @@ function App() {
 
   const styles = {
     container: {
-      display: 'flex',
-      minHeight: '100vh',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(to bottom right, #f9fafb, #f3f4f6)',
-      padding: '1rem'
+      display: "flex",
+      minHeight: "100vh",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "linear-gradient(to bottom right, #f9fafb, #f3f4f6)",
+      padding: "1rem",
     },
     card: {
-      width: '100%',
-      maxWidth: '28rem',
-      backgroundColor: 'white',
-      borderRadius: '0.5rem',
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-      transition: 'all 0.3s',
-      overflow: 'hidden'
+      width: "100%",
+      maxWidth: "28rem",
+      backgroundColor: "white",
+      borderRadius: "0.5rem",
+      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      transition: "all 0.3s",
+      overflow: "hidden",
     },
     cardHeader: {
-      padding: '1.5rem',
-      borderBottom: '1px solid #e5e7eb'
+      padding: "1.5rem",
+      borderBottom: "1px solid #e5e7eb",
     },
     title: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      textAlign: 'center',
-      margin: '0 0 0.5rem 0'
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+      textAlign: "center",
+      margin: "0 0 0.5rem 0",
     },
     description: {
-      fontSize: '0.875rem',
-      color: '#6b7280',
-      textAlign: 'center',
-      margin: 0
+      fontSize: "0.875rem",
+      color: "#6b7280",
+      textAlign: "center",
+      margin: 0,
     },
     cardContent: {
-      padding: '1.5rem'
+      padding: "1.5rem",
     },
     buttonContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '1.5rem'
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: "1.5rem",
     },
     button: {
-      backgroundColor: '#f59e0b',
-      color: 'white',
-      border: 'none',
-      borderRadius: '0.375rem',
-      padding: '0.5rem 1rem',
-      fontSize: '0.875rem',
-      fontWeight: '500',
-      cursor: 'pointer',
-      transition: 'background-color 0.2s',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      backgroundColor: "#f59e0b",
+      color: "white",
+      border: "none",
+      borderRadius: "0.375rem",
+      padding: "0.5rem 1rem",
+      fontSize: "0.875rem",
+      fontWeight: "500",
+      cursor: "pointer",
+      transition: "background-color 0.2s",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     buttonDisabled: {
       opacity: 0.5,
-      cursor: 'not-allowed'
+      cursor: "not-allowed",
     },
     form: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1rem'
+      display: "flex",
+      flexDirection: "column",
+      gap: "1rem",
     },
     formGroup: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '0.5rem'
+      display: "flex",
+      flexDirection: "column",
+      gap: "0.5rem",
     },
     label: {
-      fontSize: '0.875rem',
-      fontWeight: '500'
+      fontSize: "0.875rem",
+      fontWeight: "500",
     },
     input: {
-      padding: '0.5rem',
-      borderRadius: '0.375rem',
-      border: '1px solid #d1d5db',
-      fontSize: '0.875rem'
-    },
-    fileUploadContainer: {
-      position: 'relative'
-    },
-    fileInput: {
-      display: 'none'
+      padding: "0.5rem",
+      borderRadius: "0.375rem",
+      border: "1px solid #d1d5db",
+      fontSize: "0.875rem",
     },
     outputContainer: {
-      padding: '1rem',
-      marginTop: '1rem',
-      backgroundColor: '#f3f4f6',
-      borderRadius: '0.375rem',
-      overflowX: 'auto'
+      padding: "1rem",
+      marginTop: "1rem",
+      backgroundColor: "#f3f4f6",
+      borderRadius: "0.375rem",
+      overflowX: "auto",
     },
     pre: {
       margin: 0,
-      fontSize: '0.875rem',
-      textAlign: 'left',
-      color: '#1f2937'
-    }
+      fontSize: "0.875rem",
+      textAlign: "left",
+      color: "#1f2937",
+    },
   };
 
   return (
@@ -172,7 +165,7 @@ function App() {
               onClick={handlePayWithBTC}
               style={{
                 ...styles.button,
-                ...(loading ? styles.buttonDisabled : {})
+                ...(loading ? styles.buttonDisabled : {}),
               }}
               disabled={loading}
             >
@@ -182,7 +175,9 @@ function App() {
 
           <form onSubmit={handleUploadResume} style={styles.form}>
             <div style={styles.formGroup}>
-              <label htmlFor="invoice-id" style={styles.label}>Invoice ID</label>
+              <label htmlFor="invoice-id" style={styles.label}>
+                Invoice ID
+              </label>
               <input
                 id="invoice-id"
                 type="text"
@@ -195,7 +190,9 @@ function App() {
             </div>
 
             <div style={styles.formGroup}>
-              <label htmlFor="job-title" style={styles.label}>Job Title</label>
+              <label htmlFor="job-title" style={styles.label}>
+                Job Title
+              </label>
               <input
                 id="job-title"
                 type="text"
@@ -208,7 +205,9 @@ function App() {
             </div>
 
             <div style={styles.formGroup}>
-              <label htmlFor="resume-file" style={styles.label}>Resume File</label>
+              <label htmlFor="resume-file" style={styles.label}>
+                Resume File
+              </label>
               <input
                 id="resume-file"
                 type="file"
@@ -225,7 +224,7 @@ function App() {
               disabled={loading}
               style={{
                 ...styles.button,
-                ...(loading ? styles.buttonDisabled : {})
+                ...(loading ? styles.buttonDisabled : {}),
               }}
             >
               {loading ? "Processing..." : "Upload Resume"}
