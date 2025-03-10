@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const API_BASE = "https://resume-scanner-backend.azurewebsites.net"; // Deployed FastAPI URL
+console.log("Deploying version 2.000000000000000000000");
 
 function App() {
   const [invoiceId, setInvoiceId] = useState("");
