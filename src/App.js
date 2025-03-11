@@ -87,7 +87,7 @@ function App() {
   const [jobTitle, setJobTitle] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState(null);
   const [fileName, setFileName] = useState("");
 
   const handleFileUpload = (event) => {
@@ -126,7 +126,8 @@ function App() {
       const response = await axios.post(`${API_BASE}/upload-resume/`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      setOutput(JSON.stringify(response.data, null, 2));
+      // Store the response object directly (instead of stringifying it)
+      setOutput(response.data);
     } catch (error) {
       console.error("Upload failed:", error);
       alert("Error uploading resume.");
@@ -189,14 +190,11 @@ function App() {
         </button>
       </form>
 
-    {output && (
-    <div className="max-w-md mx-auto mt-4 bg-gray-100 p-4 rounded shadow">
-        <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
-        {output.analysis}
-        </pre>
-    </div>
-    )}
-
+      {output && output.analysis && (
+        <div style={styles.outputContainer}>
+          <pre style={styles.outputPre}>{output.analysis}</pre>
+        </div>
+      )}
     </div>
   );
 }
