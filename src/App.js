@@ -64,13 +64,14 @@ const styles = {
     fontSize: "0.875rem",
     color: "#6b7280", // gray-600
   },
+  // Output area styling for a wider container
   outputContainer: {
     marginTop: "2rem",
+    width: "80%",            // spans 80% of the viewport width
+    maxWidth: "40rem",       // but no more than 40rem
     backgroundColor: "#f3f4f6",
     padding: "1rem",
     borderRadius: "0.5rem",
-    maxWidth: "24rem",
-    width: "100%",
     overflowX: "auto",
     boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
     textAlign: "left",
@@ -87,6 +88,7 @@ function App() {
   const [jobTitle, setJobTitle] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  // Store the output as an object so we can access its properties
   const [output, setOutput] = useState(null);
   const [fileName, setFileName] = useState("");
 
@@ -126,7 +128,7 @@ function App() {
       const response = await axios.post(`${API_BASE}/upload-resume/`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      // Store the response object directly (instead of stringifying it)
+      // Store response as an object, not a string
       setOutput(response.data);
     } catch (error) {
       console.error("Upload failed:", error);
