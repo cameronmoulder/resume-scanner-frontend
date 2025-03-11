@@ -1,8 +1,86 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_BASE = "https://resume-scanner-backend.azurewebsites.net"; // Deployed FastAPI URL
+// Change this to your deployed FastAPI URL
+const API_BASE = "https://resume-scanner-backend.azurewebsites.net";
 console.log("Deploying version 2.000000000000000000000");
+
+// Define a single styles object for all inline styles
+const styles = {
+  container: {
+    minHeight: "100vh",
+    background: "#f8fafc", // light gray
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "2rem",
+    textAlign: "center",
+  },
+  heading: {
+    fontSize: "2rem",
+    fontWeight: "bold",
+    marginBottom: "1.5rem",
+    color: "#333",
+  },
+  button: {
+    backgroundColor: "#f59e0b", // vibrant gold
+    color: "#fff",
+    border: "none",
+    borderRadius: "0.5rem",
+    padding: "0.75rem 1.5rem",
+    fontSize: "1rem",
+    fontWeight: "500",
+    cursor: "pointer",
+    marginTop: "1rem",
+    transition: "transform 0.2s, box-shadow 0.2s",
+  },
+  buttonDisabled: {
+    opacity: 0.5,
+    cursor: "not-allowed",
+  },
+  formContainer: {
+    marginTop: "2rem",
+    maxWidth: "24rem",
+    width: "100%",
+    backgroundColor: "#fff",
+    padding: "1.5rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+  },
+  input: {
+    padding: "0.75rem",
+    borderRadius: "0.375rem",
+    border: "1px solid #d1d5db",
+    fontSize: "1rem",
+    width: "100%",
+    outline: "none",
+  },
+  fileName: {
+    marginTop: "0.5rem",
+    fontSize: "0.875rem",
+    color: "#6b7280", // gray-600
+  },
+  outputContainer: {
+    marginTop: "2rem",
+    backgroundColor: "#f3f4f6",
+    padding: "1rem",
+    borderRadius: "0.5rem",
+    maxWidth: "24rem",
+    width: "100%",
+    overflowX: "auto",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
+  },
+  outputPre: {
+    fontSize: "0.875rem",
+    whiteSpace: "pre-wrap",
+    wordWrap: "break-word",
+  },
+};
 
 function App() {
   const [invoiceId, setInvoiceId] = useState("");
@@ -12,7 +90,6 @@ function App() {
   const [output, setOutput] = useState("");
   const [fileName, setFileName] = useState("");
 
-  // ✅ Ensure this function is correctly defined
   const handleFileUpload = (event) => {
     const file = event.target.files?.[0] || null;
     setResumeFile(file);
@@ -59,19 +136,28 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Resume Scanner</h1>
-      <button onClick={handlePayWithBTC} disabled={loading}>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Resume Scanner</h1>
+
+      <button
+        onClick={handlePayWithBTC}
+        style={{
+          ...styles.button,
+          ...(loading ? styles.buttonDisabled : {}),
+        }}
+        disabled={loading}
+      >
         {loading ? "Processing..." : "Pay with Bitcoin"}
       </button>
 
-      <form onSubmit={handleUploadResume}>
+      <form onSubmit={handleUploadResume} style={styles.formContainer}>
         <input
           type="text"
           placeholder="Enter Invoice ID after payment"
           value={invoiceId}
           onChange={(e) => setInvoiceId(e.target.value)}
           required
+          style={styles.input}
         />
         <input
           type="text"
@@ -79,20 +165,35 @@ function App() {
           value={jobTitle}
           onChange={(e) => setJobTitle(e.target.value)}
           required
+          style={styles.input}
         />
-        <input
-          type="file"
-          accept=".pdf,.docx"
-          onChange={handleFileUpload} // ✅ Function is now properly referenced
-          required
-        />
-        {fileName && <p>{fileName}</p>}
-        <button type="submit" disabled={loading}>
+        <div>
+          <input
+            type="file"
+            accept=".pdf,.docx"
+            onChange={handleFileUpload}
+            required
+            style={styles.input}
+          />
+          {fileName && <p style={styles.fileName}>{fileName}</p>}
+        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            ...styles.button,
+            ...(loading ? styles.buttonDisabled : {}),
+          }}
+        >
           {loading ? "Processing..." : "Upload Resume"}
         </button>
       </form>
 
-      {output && <pre>{output}</pre>}
+      {output && (
+        <div style={styles.outputContainer}>
+          <pre style={styles.outputPre}>{output}</pre>
+        </div>
+      )}
     </div>
   );
 }
