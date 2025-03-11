@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Change this to your deployed FastAPI URL
 const API_BASE = "https://resume-scanner-backend.azurewebsites.net";
-console.log("Deploying version 2.000000000000000000000");
+console.log("Deploying version 2.0123");
 
 // Define a single styles object for all inline styles
 const styles = {
