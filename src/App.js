@@ -189,11 +189,14 @@ function App() {
         </button>
       </form>
 
-      {output && (
-        <div style={styles.outputContainer}>
-          <pre style={styles.outputPre}>{output}</pre>
-        </div>
-      )}
+    {output && (
+    <div className="max-w-md mx-auto mt-4 bg-gray-100 p-4 rounded shadow">
+        <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+        {output.analysis}
+        </pre>
+    </div>
+    )}
+
     </div>
   );
 }
