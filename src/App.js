@@ -141,7 +141,11 @@ function App() {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Resume Rizz</h1>
-      <p>1. Pay Me </p> <br /> <p> 2. Use Invoice ID </p> <br />  <p> 3. Upload Resume </p> <br /> <p> 4. Get the tips you need to land the job of your dreams!</p>
+      <p>1. Pay Me  <br />
+      2. Use Invoice ID  <br />
+      3. Upload Resume <br />
+      4. Get the tips you need to land the job of your dreams!</p>
+
       <button
         onClick={handlePayWithBTC}
         style={{
