@@ -9,7 +9,8 @@ console.log("Deploying version 2.0123");
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "#f8fafc", // light gray
+    background: "#000",    // Black background
+    color: "#fff",         // White text
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -21,11 +22,11 @@ const styles = {
     fontSize: "2rem",
     fontWeight: "bold",
     marginBottom: "1.5rem",
-    color: "#333",
+    color: "#fff", // Also ensure heading is white
   },
   button: {
     backgroundColor: "#f59e0b", // vibrant gold
-    color: "#fff",
+    color: "#000",              // Make button text black for contrast
     border: "none",
     borderRadius: "0.5rem",
     padding: "0.75rem 1.5rem",
@@ -43,10 +44,11 @@ const styles = {
     marginTop: "2rem",
     maxWidth: "24rem",
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#333", // Dark gray form background
+    color: "#fff",
     padding: "1.5rem",
     borderRadius: "0.5rem",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
@@ -54,27 +56,29 @@ const styles = {
   input: {
     padding: "0.75rem",
     borderRadius: "0.375rem",
-    border: "1px solid #d1d5db",
+    border: "1px solid #555", // Slightly lighter border
     fontSize: "1rem",
     width: "100%",
     outline: "none",
+    backgroundColor: "#222",  // Make input background dark
+    color: "#fff",
   },
   fileName: {
     marginTop: "0.5rem",
     fontSize: "0.875rem",
-    color: "#6b7280", // gray-600
+    color: "#bbb", // Lighter gray text
   },
-  // Output area styling for a wider container
   outputContainer: {
     marginTop: "2rem",
-    width: "80%",            // spans 80% of the viewport width
-    maxWidth: "40rem",       // but no more than 40rem
-    backgroundColor: "#f3f4f6",
+    width: "80%",
+    maxWidth: "40rem",
+    backgroundColor: "#222",
     padding: "1rem",
     borderRadius: "0.5rem",
     overflowX: "auto",
-    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.5)",
     textAlign: "left",
+    color: "#fff",
   },
   outputPre: {
     fontSize: "0.875rem",
@@ -88,7 +92,6 @@ function App() {
   const [jobTitle, setJobTitle] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  // Store the output as an object so we can access its properties
   const [output, setOutput] = useState(null);
   const [fileName, setFileName] = useState("");
 
@@ -128,7 +131,6 @@ function App() {
       const response = await axios.post(`${API_BASE}/upload-resume/`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      // Store response as an object, not a string
       setOutput(response.data);
     } catch (error) {
       console.error("Upload failed:", error);
@@ -141,10 +143,10 @@ function App() {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Resume Rizz</h1>
-      <p>1. Pay Me  <br />
-      2. Use Invoice ID  <br />
-      3. Upload Resume <br />
-      4. Get the tips you need to land the job of your dreams!</p>
+      <p>1. Pay Me</p>
+      <p>2. Use Invoice ID</p>
+      <p>3. Upload Resume</p>
+      <p>4. Get the tips you need to land the job of your dreams!</p>
 
       <button
         onClick={handlePayWithBTC}
