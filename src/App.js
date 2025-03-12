@@ -22,11 +22,11 @@ const styles = {
     fontSize: "2rem",
     fontWeight: "bold",
     marginBottom: "1.5rem",
-    color: "#fff", // Also ensure heading is white
+    color: "#fff", // heading is white
   },
   button: {
     backgroundColor: "#f59e0b", // vibrant gold
-    color: "#000",              // Make button text black for contrast
+    color: "#000",              // black text for contrast
     border: "none",
     borderRadius: "0.5rem",
     padding: "0.75rem 1.5rem",
@@ -44,7 +44,7 @@ const styles = {
     marginTop: "2rem",
     maxWidth: "24rem",
     width: "100%",
-    backgroundColor: "#333", // Dark gray form background
+    backgroundColor: "#333", // dark gray
     color: "#fff",
     padding: "1.5rem",
     borderRadius: "0.5rem",
@@ -52,21 +52,22 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
+    alignItems: "center", // center child elements horizontally
   },
   input: {
     padding: "0.75rem",
     borderRadius: "0.375rem",
-    border: "1px solid #555", // Slightly lighter border
+    border: "1px solid #555",
     fontSize: "1rem",
-    width: "100%",
+    width: "80%",         // narrower, so it doesn't span entire container
     outline: "none",
-    backgroundColor: "#222",  // Make input background dark
+    backgroundColor: "#222",
     color: "#fff",
   },
   fileName: {
     marginTop: "0.5rem",
     fontSize: "0.875rem",
-    color: "#bbb", // Lighter gray text
+    color: "#bbb",
   },
   outputContainer: {
     marginTop: "2rem",
@@ -191,6 +192,7 @@ function App() {
           disabled={loading}
           style={{
             ...styles.button,
+            width: "80%", // match the input width
             ...(loading ? styles.buttonDisabled : {}),
           }}
         >
